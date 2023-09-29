@@ -1,6 +1,7 @@
 package com.potinga.spring.rest.controller;
 
 import com.potinga.spring.rest.entity.Employee;
+import com.potinga.spring.rest.exception_handling.EmployeeGlobalExceptionHandler;
 import com.potinga.spring.rest.exception_handling.EmployeeIncorrectData;
 import com.potinga.spring.rest.exception_handling.NoSuchEmployeeException;
 import com.potinga.spring.rest.service.EmployeeService;
@@ -30,6 +31,12 @@ public class MyRESTController {
             throw new NoSuchEmployeeException("There is no employee with ID = " +
                     id + " in Database");
         }
+        return employee;
+    }
+
+    @PostMapping("/employees")
+    public Employee addNewEmployee(@RequestBody Employee employee) {
+        employeeService.saveEmployee(employee);
         return employee;
     }
 }
